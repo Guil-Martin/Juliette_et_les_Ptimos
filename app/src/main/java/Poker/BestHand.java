@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 public class BestHand {
 
-    private BestHand() {}
-
     public static Hands besthand(Card[] cards) {
 
         Arrays.sort(cards);
@@ -32,7 +30,5 @@ public class BestHand {
 
         return bestHand;
     }
-
-
 
 }

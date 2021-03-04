@@ -12,36 +12,28 @@ import java.awt.event.MouseListener;
 
 public class PanelActions extends JPanel implements KeyListener, MouseListener {
 
-    private PtimoGUI gui;
-    private Game game;
+    private final PtimoGUI gui;
+    private final Game game;
 
     Dimension iconSize = new Dimension(50,50);
 
-    private ImageIcon icon_check;
-    private ImageIcon icon_approach;
-    private ImageIcon icon_treat;
-    private ImageIcon icon_sleeping_dart;
-    private ImageIcon icon_potion;
-    private ImageIcon icon_flee;
-    private ImageIcon icon_dance;
-
     Dimension actionSize = new Dimension(150,50);
 
-    private JLabel actionIconCheck;
-    private JLabel actionIconApproach;
-    private JLabel actionIconPotion;
-    private JLabel actionIconTreat;
-    private JLabel actionIconSDart;
-    private JLabel actionIconFlee;
-    private JLabel actionIconDance;
+    private final JLabel actionIconCheck;
+    private final JLabel actionIconApproach;
+    private final JLabel actionIconPotion;
+    private final JLabel actionIconTreat;
+    private final JLabel actionIconSDart;
+    private final JLabel actionIconFlee;
+    private final JLabel actionIconDance;
 
-    private JLabel actionCheck;
-    private JLabel actionApproach;
-    private JLabel actionTreat;
-    private JLabel actionDance;
-    private JLabel actionPotion;
-    private JLabel actionSleepDart;
-    private JLabel actionFlee;
+    private final JLabel actionCheck;
+    private final JLabel actionApproach;
+    private final JLabel actionTreat;
+    private final JLabel actionDance;
+    private final JLabel actionPotion;
+    private final JLabel actionSleepDart;
+    private final JLabel actionFlee;
 
     public PanelActions(PtimoGUI ptimoGui) {
         this.gui = ptimoGui;
@@ -56,13 +48,13 @@ public class PanelActions extends JPanel implements KeyListener, MouseListener {
         setSize(gui.getWindowDims().width,100);
         setBackground(Color.black);
 
-        icon_check = gui.getImageIcon(gui.getImagesPath()+"icon_check.png");
-        icon_approach = gui.getImageIcon(gui.getImagesPath()+"icon_approach.png");
-        icon_potion = gui.getImageIcon(gui.getImagesPath()+"icon_potion.png");
-        icon_treat = gui.getImageIcon(gui.getImagesPath()+"icon_treat.png");
-        icon_sleeping_dart = gui.getImageIcon(gui.getImagesPath()+"icon_sleeping_dart.png");
-        icon_flee = gui.getImageIcon(gui.getImagesPath()+"icon_flee.png");
-        icon_dance = gui.getImageIcon(gui.getImagesPath()+"icon_dance.png");
+        ImageIcon icon_check = gui.getImageIcon(gui.getImagesPath() + "icon_check.png");
+        ImageIcon icon_approach = gui.getImageIcon(gui.getImagesPath() + "icon_approach.png");
+        ImageIcon icon_potion = gui.getImageIcon(gui.getImagesPath() + "icon_potion.png");
+        ImageIcon icon_treat = gui.getImageIcon(gui.getImagesPath() + "icon_treat.png");
+        ImageIcon icon_sleeping_dart = gui.getImageIcon(gui.getImagesPath() + "icon_sleeping_dart.png");
+        ImageIcon icon_flee = gui.getImageIcon(gui.getImagesPath() + "icon_flee.png");
+        ImageIcon icon_dance = gui.getImageIcon(gui.getImagesPath() + "icon_dance.png");
 
         actionIconCheck = new JLabel();
         actionIconCheck.setIcon(icon_check);

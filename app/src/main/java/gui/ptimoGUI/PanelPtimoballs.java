@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class PanelPtimoballs extends JPanel {
 
-    private Game game;
-    private PtimoGUI gui;
+    private final Game game;
+    private final PtimoGUI gui;
 
-    private Image iconSacbleu;
-    private Image iconPyralia;
-    private Image iconPokerand;
-    private Image iconPtimo;
+    private final Image iconSacbleu;
+    private final Image iconPyralia;
+    private final Image iconPokerand;
+    private final Image iconPtimo;
 
     public PanelPtimoballs(PtimoGUI ptimoGui) {
 

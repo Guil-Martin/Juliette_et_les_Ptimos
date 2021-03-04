@@ -5,9 +5,8 @@ import java.awt.*;
 
 public class PanelBg extends JPanel {
 
-    private PtimoGUI gui;
+    private final PtimoGUI gui;
 
-    private final String backgroundsPath = "/ptimoImgs/bg/";
     private Image bg;
 
     public PanelBg(PtimoGUI ptimoGui) {
@@ -18,10 +17,11 @@ public class PanelBg extends JPanel {
     }
 
     public void setBg(String bg) {
+        String backgroundsPath = "/ptimoImgs/bg/";
         this.bg = switch (bg) {
-            case "forest" -> gui.getImageIcon(backgroundsPath+"forest.png").getImage();
-            case "house" -> gui.getImageIcon(backgroundsPath+"house.png").getImage();
-            default -> gui.getImageIcon(backgroundsPath+"MapArena.png").getImage();
+            case "forest" -> gui.getImageIcon(backgroundsPath +"forest.png").getImage();
+            case "house" -> gui.getImageIcon(backgroundsPath +"house.png").getImage();
+            default -> gui.getImageIcon(backgroundsPath +"MapArena.png").getImage();
         };
     }
 

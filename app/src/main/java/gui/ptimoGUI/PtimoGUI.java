@@ -9,18 +9,17 @@ public class PtimoGUI extends JFrame {
 
     private static PtimoGUI gui;
 
-    private Dimension windowDims = new Dimension(1000, 700);
-    private final String imagesPath = "/ptimoImgs/";
+    private final Dimension windowDims = new Dimension(1000, 700);
 
-    private PanelBg panelBg;
-    private PanelAnimation panelAnimation;
-    private PanelActions panelActions;
-    private PanelPtimoballs panelPtimoball;
-    private PanelStats panelStats;
-    private PanelDialogue panelDialogue;
-    private PanelCards panelCards;
+    private final PanelBg panelBg;
+    private final PanelAnimation panelAnimation;
+    private final PanelActions panelActions;
+    private final PanelPtimoballs panelPtimoball;
+    private final PanelStats panelStats;
+    private final PanelDialogue panelDialogue;
+    private final PanelCards panelCards;
 
-    private JButton btnRestart;
+    private final JButton btnRestart;
 
     // 0 - No controls / 1 - combat controls / 2 - Free movement left and right
     private int gameState;
@@ -92,7 +91,7 @@ public class PtimoGUI extends JFrame {
     // ===== Getters setters =====
     public Dimension getWindowDims() { return windowDims; }
     public ImageIcon getImageIcon(String path) { return new ImageIcon(getClass().getResource(path)); }
-    public String getImagesPath() { return imagesPath; }
+    public String getImagesPath() { return "/ptimoImgs/"; }
     public JButton getBtnRestart() {
         return btnRestart;
     }

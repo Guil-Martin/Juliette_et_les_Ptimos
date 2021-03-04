@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class PanelCards extends JPanel {
 
-    private PtimoGUI gui;
+    private final PtimoGUI gui;
 
     private final Card[] displayCards = new Card[5];
     private LinkedList<Card> highlightCard;

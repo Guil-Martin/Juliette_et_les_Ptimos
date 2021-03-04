@@ -14,7 +14,6 @@ import java.util.Random;
 public class Game {
 
     private static Game game;
-    private Deck deck;
     int bestHandValue;
 
     private PtimoGUI gui;
@@ -438,7 +437,7 @@ public class Game {
             // Magic attack
             if (currentPtimo.getName().equals("Pokrand")) {
 
-                deck = Deck.getInstance();
+                Deck deck = Deck.getInstance();
 
                 // Draw 5 cards and test the hand, return a value as an object depending
                 Card[] hand = new Card[5];
@@ -464,7 +463,7 @@ public class Game {
                 bestHandValue = 0;
                 String dialog = "Le Ptimo "+currentPtimo.getName()+" sort une main de Poker et ";
                 if (bestHand != null) {
-                    gui.getPanelCards().placeCards(hand, bestHand.getHand()); // Add cards into the method BEFORE displaying the panel, else big errors
+                    gui.getPanelCards().placeCards(hand, Hands.getHand()); // Add cards into the method BEFORE displaying the panel, else big errors
 
                     System.out.println(bestHand.getName());
 

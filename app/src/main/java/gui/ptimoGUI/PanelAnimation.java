@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 public class PanelAnimation extends JPanel {
 
-    private PtimoGUI gui;
+    private final PtimoGUI gui;
 
     private int juliette_x = 0;
     private int juliette_y = 0;
@@ -31,7 +31,7 @@ public class PanelAnimation extends JPanel {
     private int currentPtimoOffset_y;
     private int currentPtimo_state;
 
-    private Timer timerAnim;
+    private final Timer timerAnim;
 
     public PanelAnimation(PtimoGUI ptimoGui) {
 

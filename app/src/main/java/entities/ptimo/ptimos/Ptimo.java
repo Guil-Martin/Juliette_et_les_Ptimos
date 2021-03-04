@@ -4,10 +4,10 @@ import entities.Entity;
 
 public abstract class Ptimo extends Entity {
 
-    public static int PTIMO;
-    public int number;
-    public int dominance;
-    public int stress;
+    protected static int PTIMO;
+    protected int number;
+    protected int dominance;
+    protected int stress;
 
     protected Types type;
 

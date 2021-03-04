@@ -8,16 +8,15 @@ import java.awt.*;
 
 public class PanelStats extends JPanel  {
 
-    private Game game;
-    private PtimoGUI gui;
+    private final Game game;
+    private final PtimoGUI gui;
 
     private final Image juliette_icon;
     private final Image icon_potion;
     private final Image icon_treat;
     private final Image icon_sleeping_dart;
 
-    private JProgressBar julietteHp;
-    private JProgressBar ptimoHp;
+    private final JProgressBar julietteHp;
 
     public PanelStats(PtimoGUI ptimoGui) {
         this.game = Game.gameInstance();
@@ -41,7 +40,7 @@ public class PanelStats extends JPanel  {
         julietteHp.setBounds(98, 0, 300,50);
         add(julietteHp);
 
-        ptimoHp = new JProgressBar();
+        JProgressBar ptimoHp = new JProgressBar();
         ptimoHp.setBackground(Color.black);
         ptimoHp.setForeground(Color.red);
 

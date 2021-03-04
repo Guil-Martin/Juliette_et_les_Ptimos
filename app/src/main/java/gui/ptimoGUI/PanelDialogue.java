@@ -6,9 +6,9 @@ import java.awt.*;
 
 public class PanelDialogue extends JPanel {
 
-    private PtimoGUI gui;
+    private final PtimoGUI gui;
 
-    private JTextArea dialogue;
+    private final JTextArea dialogue;
 
     public PanelDialogue(PtimoGUI ptimoGui) {
         gui = ptimoGui;
