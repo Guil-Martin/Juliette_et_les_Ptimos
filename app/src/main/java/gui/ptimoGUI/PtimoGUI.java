@@ -76,7 +76,7 @@ public class PtimoGUI extends JFrame {
 
         // Handle animations
         panelAnimation = new PanelAnimation(this);
-        panelAnimation.setBounds(0,0, getWidth(), getHeight());
+        panelAnimation.setBounds(0,0, getWidth(), getHeight()-200);
         add(panelAnimation);
 
         // Used to draw a background

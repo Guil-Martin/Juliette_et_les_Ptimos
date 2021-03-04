@@ -3,6 +3,7 @@ package gui.ptimoGUI;
 import game.Game;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class PanelStats extends JPanel  {
@@ -24,7 +25,10 @@ public class PanelStats extends JPanel  {
 
         setLayout(null);
         setSize(400,100);
-        setBackground(Color.black);
+        //setBackground(Color.black);
+        setBackground(new Color(130, 82, 130, 255));
+        Border lowerBevel = BorderFactory.createLoweredBevelBorder();
+        setBorder(lowerBevel);
 
         juliette_icon = gui.getImageIcon(gui.getImagesPath()+"icon_juliette.png").getImage();
         icon_potion = gui.getImageIcon(gui.getImagesPath()+"icon_potion.png").getImage();
@@ -34,7 +38,7 @@ public class PanelStats extends JPanel  {
         julietteHp = new JProgressBar();
         julietteHp.setBackground(Color.black);
         julietteHp.setForeground(Color.red);
-        julietteHp.setBounds(100, 0, 300,50);
+        julietteHp.setBounds(98, 0, 300,50);
         add(julietteHp);
 
         ptimoHp = new JProgressBar();
@@ -58,16 +62,16 @@ public class PanelStats extends JPanel  {
         g.setColor(Color.white);
         g.setFont(new Font("Serif", Font.BOLD, 22));
 
-        g.drawImage(icon_treat, 150, 70, 30, 30, this);
-        g.drawString(String.valueOf(game.getJulietteInstance().getTreats()), 182, 92);
-        g.drawImage(icon_potion, 220, 70, 30, 30, this);
-        g.drawString(String.valueOf(game.getJulietteInstance().getPotions()), 252, 92);
-        g.drawImage(icon_sleeping_dart, 290, 70, 30, 30, this);
-        g.drawString(String.valueOf(game.getJulietteInstance().getDart()), 322, 92);
+        g.drawImage(icon_treat, 150, 60, 30, 30, this);
+        g.drawString(String.valueOf(game.getJulietteInstance().getTreats()), 182, 82);
+        g.drawImage(icon_potion, 220, 60, 30, 30, this);
+        g.drawString(String.valueOf(game.getJulietteInstance().getPotions()), 252, 82);
+        g.drawImage(icon_sleeping_dart, 290, 60, 30, 30, this);
+        g.drawString(String.valueOf(game.getJulietteInstance().getDart()), 322, 82);
 
         g.setFont(new Font("Serif", Font.BOLD, 40));
 
-        g.drawString(game.getJulietteInstance().getHp() + "/" + game.getJulietteInstance().getMaxHp(), 100, 60);
+        g.drawString(game.getJulietteInstance().getHp() + "/" + game.getJulietteInstance().getMaxHp(), 100, 40);
     }
 
 }

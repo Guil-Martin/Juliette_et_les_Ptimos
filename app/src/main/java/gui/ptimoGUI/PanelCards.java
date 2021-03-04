@@ -16,7 +16,7 @@ public class PanelCards extends JPanel {
 
     public PanelCards(PtimoGUI ptimoGui) {
         gui = ptimoGui;
-        this.highlightCard = new LinkedList<Card>();
+        this.highlightCard = new LinkedList<>();
 
         setSize(250, 120);
         setBackground(new Color(15, 95, 4, 255));
@@ -33,6 +33,7 @@ public class PanelCards extends JPanel {
         System.arraycopy(cards, 0, displayCards, 0, displayCards.length);
     }
     public void placeCards(Card[] cards) {
+        this.highlightCard.clear(); // in case there is still cards highlithed before
         System.arraycopy(cards, 0, displayCards, 0, displayCards.length);
     }
 

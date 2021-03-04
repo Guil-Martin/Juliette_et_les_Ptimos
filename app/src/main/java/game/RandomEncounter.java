@@ -34,7 +34,6 @@ public class RandomEncounter {
 
         //return new Pokrand("Pokrand");
 
-
         // 40% chance of Pokrand apparition when Juliette has at least 5 Ptimos including at least a Saclbeu and a Pyralia
         if (juliette.getPtimoball().size() > 4 && juliette.hasPtimo("Sacbleu") && juliette.hasPtimo("Pyralia") && (rand < 40)) {
             ptimoEncounter = new Pokrand("Pokrand");

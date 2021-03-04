@@ -81,24 +81,24 @@ public class PanelAnimation extends JPanel {
         switch (ptimo) {
             case "Pyralia" -> {
                 toChange = pyralia_states;
-                currentPtimoSize_W = 150;
-                currentPtimoSize_H = 200;
+                currentPtimoSize_W = 120;
+                currentPtimoSize_H = 180;
                 currentPtimoOffset_x = 0;
-                currentPtimoOffset_y = 0;
+                currentPtimoOffset_y = 10;
             }
             case "Pokrand" -> {
                 toChange = pokrand_states;
                 currentPtimoSize_W = 250;
                 currentPtimoSize_H = 320;
-                currentPtimoOffset_x = -20;
-                currentPtimoOffset_y = -120;
+                currentPtimoOffset_x = 0;
+                currentPtimoOffset_y = -100;
             }
             default -> {
                 toChange = sacbleu_states;
-                currentPtimoSize_W = 100;
-                currentPtimoSize_H = 150;
-                currentPtimoOffset_x = -20;
-                currentPtimoOffset_y = 40;
+                currentPtimoSize_W = 120;
+                currentPtimoSize_H = 130;
+                currentPtimoOffset_x = 0;
+                currentPtimoOffset_y = 60;
 
             }
         }
@@ -177,8 +177,8 @@ public class PanelAnimation extends JPanel {
 
     /**
      * Will move Juliette in the given position and direction
-     * @param x
-     * @param y
+     * @paramX x axis >
+     * @paramY y axis v
      * @param direction 0 -> left / 1 -> right
      */
     public void julietteSetLocation(int x, int y, int direction){
@@ -192,7 +192,7 @@ public class PanelAnimation extends JPanel {
 
     /**
      * Controls image switches for animation
-     * @param juliette_state 0 - Idle / 1 - Walk / 2 - attack / 3 - throw / 4 - dance / 5 - victory / 6 - dart / 7 - hit / 8 - drink
+     * @param juliette_state 0 - Idle / 1 - Walk / 2 - attack / 3 - throw / 4 - dance / 5 - victory / 6 - dart / 7 - hit / 8 - drink / 9 - KO
      */
     public void setJuliette_state(int juliette_state) {
         this.juliette_state = juliette_state;
@@ -233,8 +233,8 @@ public class PanelAnimation extends JPanel {
             currentPtimo_x += currentPtimoSize_W;
             currentPtimoSize_W = -currentPtimoSize_W;
         }
-        currentPtimo_x = x += currentPtimoOffset_x;
-        currentPtimo_y = y += currentPtimoOffset_y;
+        currentPtimo_x += currentPtimoOffset_x;
+        currentPtimo_y += currentPtimoOffset_y;
     }
     /**
      * Controls image switches for animation

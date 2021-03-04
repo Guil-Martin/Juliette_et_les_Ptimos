@@ -8,14 +8,17 @@ public abstract class Hands {
     protected int value;
 
     // List that will be used to highlight the hand in the PanelCards class
-    protected LinkedList<Card> handCards;
+    protected static LinkedList<Card> handCards;
 
-    public Hands() {}
+    public Hands() {    }
 
     // ===== Getters setters =====
     // Will return the cards concerned by the hand
-    public LinkedList<Card> getHand() {
+    public static LinkedList<Card> getHand() {
         return handCards;
+    }
+    public static void setHandCards(LinkedList<Card> handCards) {
+        Hands.handCards = handCards;
     }
 
     public String getHandName() {
@@ -27,13 +30,13 @@ public abstract class Hands {
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
     public int getValue() {
         return value;
     }
     public void setValue(int value) {
-        value = value;
+        this.value = value;
     }
 
 }

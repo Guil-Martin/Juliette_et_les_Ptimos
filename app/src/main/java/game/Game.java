@@ -15,6 +15,7 @@ public class Game {
 
     private static Game game;
     private Deck deck;
+    int bestHandValue;
 
     private PtimoGUI gui;
     // 0 - No controls / 1 - combat controls / 2 - Free movement
@@ -129,14 +130,17 @@ public class Game {
         if (juliette.getPtimoball().size()>5 && juliette.hasPtimo("Sacbleu") && juliette.hasPtimo("Pyralia") && juliette.hasPtimo("Pokrand")) {
             // VICTORY
             gui.getPanelAnimation().julietteSetLocation(jInitial_x,jInitial_y,0);
-            gui.getPanelAnimation().doAnimation("Juliette", 5, 5000);
+            gui.getPanelAnimation().setJuliette_state(5);
             gui.getPanelDialogue().changeDialogue(juliette.getName()+" a réussi à capturer un Ptimo de chaque espèce ! Bravo !");
             gui.getBtnRestart().setVisible(true);
-
+        } else if (juliette.getPtimoball().size() > 9) {
+            // Did juliette use all the ptimoballs but didn't get all 3 of them ?
+            gui.getPanelDialogue().changeDialogue(juliette.getName()+" n'a plus de Ptimoballs et n'est pas parvenue à capturer toutes les espèces de Ptimos ! C'est perdu !");
+            gui.getPanelAnimation().julietteSetLocation(jInitial_x,jInitial_y,0);
+            gui.getPanelAnimation().ptimoSetLocation(1300,0,1);
+            gui.getBtnRestart().setVisible(true);
         } else {
-
             beginCombat();
-
         }
     }
 
@@ -219,7 +223,7 @@ public class Game {
                                         currentPtimo.addStress(-(randomGen.nextInt(16)+15));
                                         System.out.println("Throw treat success - "+currentPtimo);
                                     } else {
-                                        gui.getPanelDialogue().changeDialogue(juliette.getName()+" lance une friandise au Ptimo "+currentPtimo.getName()+" mais elle rate ! Le ptimo semble un peu plus méfiant et féroce !");
+                                        gui.getPanelDialogue().changeDialogue(juliette.getName()+" lance une friandise au Ptimo "+currentPtimo.getName()+" mais elle rate ! Le Ptimo semble un peu plus méfiant et féroce !");
                                         currentPtimo.addStress(randomGen.nextInt(6)+5);
                                         currentPtimo.addDominance(randomGen.nextInt(6)+5);
                                         System.out.println("Throw treat fail - "+currentPtimo);
@@ -389,10 +393,10 @@ public class Game {
             delayTurn.stop();
 
             if (turn == 1) {
-                if (juliette.getHp() < 1) {
+                if (juliette.getHp() < 1) { // Is Juliette KO ?
+                    gui.getPanelDialogue().changeDialogue(juliette.getName()+" a perdu connaissance, c'est perdu !");
                     gui.getPanelAnimation().setJuliette_state(9); // KO animation
                     gui.getPanelAnimation().julietteSetLocation(jInitial_x,jInitial_y,0);
-                    gui.getPanelDialogue().changeDialogue(juliette.getName()+"Juliette a perdu connaissance, c'est la défaite !");
                     gui.getPanelAnimation().ptimoSetLocation(1300,0,1);
                     gui.getBtnRestart().setVisible(true);
                 } else {
@@ -438,29 +442,50 @@ public class Game {
 
                 // Draw 5 cards and test the hand, return a value as an object depending
                 Card[] hand = new Card[5];
+
                 for (int i = 0; i < hand.length; i++) {
                     hand[i] = deck.getRandomCard();
+                    System.out.println("Card - "+hand[i]);
                 }
 
                 /*
-                hand[0] = deck.getCard("c6");
+                hand[0] = deck.getCard("c4");
                 hand[1] = deck.getCard("d6");
-                hand[2] = deck.getCard("dq");
-                hand[3] = deck.getCard("cq");
+                hand[2] = deck.getCard("d8");
+                hand[3] = deck.getCard("c10");
                 hand[4] = deck.getCard("sq");
-                                 */
+                */
+
 
                 deck.addCardToDeck(hand);
 
                 Hands bestHand = BestHand.besthand(hand);
 
+                bestHandValue = 0;
+                String dialog = "Le Ptimo "+currentPtimo.getName()+" sort une main de Poker et ";
                 if (bestHand != null) {
                     gui.getPanelCards().placeCards(hand, bestHand.getHand()); // Add cards into the method BEFORE displaying the panel, else big errors
+
+                    System.out.println(bestHand.getName());
+
+                    bestHandValue = bestHand.getValue();
+
+                    if (bestHandValue >= 6) { // Fullhouse, FourOfAKind, Straight flush
+                        dialog += "obtient "+(bestHand.getHandName().equals("FourOfAKind") ? "un Carré" : (bestHand.getHandName().equals("StraightFlush") ? "une Quinte Flush" : (bestHand.getHandName().equals("FullHouse") ? "un Full" : "une Quinte Flush Royale")))+" !! Il assome "+juliette.getName()+" et libère tous ses Ptimos capturés !";
+                    } else if (bestHandValue >= 3) { // ThreeofAKind, Straight, Flush
+                        dialog += "obtient "+(bestHand.getHandName().equals("ThreeOfAKind") ? "un Brelan" : (bestHand.getHandName().equals("Straight") ? "une Suite" : "une couleur"))+ " ! il attaque "+juliette.getName()+" une dernière fois avant de fuir !";
+                    } else if (bestHandValue >= 1) {  // TwoPair, Pair
+                        dialog += "obtient "+(bestHand.getHandName().equals("TwoPair") ? "deux paires" : "une paire")+ " ! il inflige à "+juliette.getName()+" une puissante attaque !";
+                    }
+
+                } else {
+                    gui.getPanelCards().placeCards(hand);
+                    dialog +=" n'a aucun jeu ! Il semble moins agressif.";
                 }
-                else gui.getPanelCards().placeCards(hand);
+
+                gui.getPanelDialogue().changeDialogue(dialog);
 
                 gui.getPanelCards().setVisible(true);
-                gui.getPanelDialogue().changeDialogue("Le Ptimo "+currentPtimo.getName()+" sort une main de Poker !");
 
                 performAction.setInitialDelay(3000);
                 gui.getPanelAnimation().doAnimation("Ptimo", 2, 1000);
@@ -468,38 +493,23 @@ public class Game {
                     performAction.removeActionListener(performAction.getActionListeners()[0]);
                     performAction.stop();
 
-                    int bestHandValue = 0;
                     gui.getPanelCards().setVisible(false);
-                    if (bestHand != null) {
-                        System.out.println(bestHand.getName());
-                        bestHandValue = bestHand.getValue();
-                        gui.getPanelDialogue().changeDialogue("Le Ptimo "+currentPtimo.getName()+" obtient un "+bestHand.getHandName());
-                        System.out.println("Pokrand obtient un "+bestHand.getHandName());
-                    } else {
-                        System.out.println("No hand");
-                    }
-                    System.out.println("bestHandValue - "+bestHandValue);
 
+                    // Poker hand effects
                     if (bestHandValue >= 6) { // Fullhouse, FourOfAKind, Straight flush
                         gui.getPanelAnimation().ptimoSetLocation(1300,0,1);
-                        gui.getPanelDialogue().changeDialogue("Le Ptimo "+currentPtimo.getName()+" assome "+juliette.getName()+" et libère tous ses Ptimos capturés !");
                         juliette.getPtimoball().clear();
                         gui.getPanelAnimation().setJuliette_state(9);
                         transition(1, 1);
                     } else if (bestHandValue >= 3) { // ThreeofAKind, Straight, Flush
-                        gui.getPanelDialogue().changeDialogue("Le Ptimo "+currentPtimo.getName()+" a "+(bestHand.getHandName().equals("ThreeOfAKind") ? "un brelan" : (bestHand.getHandName().equals("Straight") ? "une suite" : "une couleur")+ ", il attaque Juliette une dernière fois avant de fuir !"));
-
                         attack();
                         flee();
-                    } else if (bestHandValue >= 1){
-                        //Si le combo est supérieur ou égale à une paire (paire ou double paire), le Pokerand fait une attaque magique commune.
-                        gui.getPanelDialogue().changeDialogue("Le Ptimo "+currentPtimo.getName()+" a "+(bestHand.getHandName().equals("TwoPair") ? "deux paires" : "une paire")+ ", il inflige à Juliette une puissante attaque !");
+                    } else if (bestHandValue >= 1) { // TwoPair, Pair
                         magicAttack();
-                    } else {
-                        currentPtimo.addDominance(-10);
-                        gui.getPanelDialogue().changeDialogue(currentPtimo.getName()+" n'a aucune main ! Il semble moins agressif.");
-                        transition(1);
                     }
+
+                    currentPtimo.addDominance(-10);
+                    transition(1);
 
                 });
                 performAction.start();

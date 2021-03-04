@@ -14,7 +14,9 @@ public class PanelDialogue extends JPanel {
         gui = ptimoGui;
 
         setSize(gui.getWindowDims().width, gui.getWindowDims().height-200);
-        setBackground(new Color(200, 130, 145, 125));
+
+        //setBackground(new Color(200, 130, 145, 125));
+        setBackground(Color.black);
 
         Border lowerBevel = BorderFactory.createLoweredBevelBorder();
         Border border = BorderFactory.createBevelBorder(5, Color.white, Color.black);
@@ -35,12 +37,7 @@ public class PanelDialogue extends JPanel {
     }
 
     public void changeDialogue(String text) {
-        Runnable textUpdate = new Runnable() {
-            public void run() {
-                dialogue.setText(text);
-            }
-        };
-        SwingUtilities.invokeLater(textUpdate);
+        dialogue.setText(text);
     }
 
 }
