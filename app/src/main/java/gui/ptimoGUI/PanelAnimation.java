@@ -233,8 +233,8 @@ public class PanelAnimation extends JPanel {
             currentPtimo_x += currentPtimoSize_W;
             currentPtimoSize_W = -currentPtimoSize_W;
         }
-        currentPtimo_x += currentPtimoOffset_x;
-        currentPtimo_y += currentPtimoOffset_y;
+        currentPtimo_x = x += currentPtimoOffset_x;
+        currentPtimo_y = y += currentPtimoOffset_y;
     }
     /**
      * Controls image switches for animation

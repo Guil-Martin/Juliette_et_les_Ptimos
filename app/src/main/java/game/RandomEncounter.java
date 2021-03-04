@@ -45,8 +45,6 @@ public class RandomEncounter {
             }
         }
 
-
-
         return ptimoEncounter;
 
     }
